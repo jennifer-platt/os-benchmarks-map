@@ -1,0 +1,36 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Benchmark Found</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="found-form">
+      <mat-form-field class="date-found">
+        <mat-label>Select date found</mat-label>
+        <input matInput [matDatepicker]="picker" [value]="startDate">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <input type="file" class="file-input">
+<!--             (change)="onFileSelected($event)" #fileUpload>-->
+
+      <div class="file-upload">
+        {{fileName || "Upload a file"}}
+        <button mat-mini-fab color="primary" class="upload-btn">
+<!--                (click)="fileUpload.click()">-->
+          <mat-icon>attach_file</mat-icon>
+        </button>
+      </div>
+
+      <mat-form-field class="comments">
+        <mat-label>Add comments</mat-label>
+        <textarea matInput #message maxlength="256"></textarea>
+        <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-stroked-button id="submit">Submit</button>
+    <button mat-stroked-button id="cancel">Cancel</button>
+  </mat-card-actions>
+</mat-card>

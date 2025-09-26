@@ -1,0 +1,32 @@
+<div class="custom-card">
+  <div class="custom-card-header">
+    <h3 class="custom-card-title">{{ description }}</h3>
+  </div>
+  @if (imageFilename) {
+    <img class="custom-card-image" [src]="imageFilename" />
+  }
+
+  <div class="custom-card-content">
+    <p>{{ type }}, {{ year }}</p>
+    @if (status !== 'found') {
+      <p>HEIGHT ABOVE GROUND: {{ heightAboveGround }}m</p>
+    }
+    @if (dateFound) {
+      <p>DATE FOUND: {{ dateFound }}</p>
+    }
+    @if (comments) {
+      <p>COMMENTS: {{ comments }}</p>
+    }
+  </div>
+
+  <div class="custom-card-actions">
+    @if (status === 'not_found') {
+<!--      <button mat-stroked-button id="found"  (click)="openOverlay()">Mark as Found</button>-->
+      <button mat-stroked-button id="found">Mark as Found</button>
+      <button mat-stroked-button id="lost">Mark as Lost</button>
+    }
+    @else {
+      <button mat-stroked-button id="edit">Edit</button>
+    }
+  </div>
+</div>
