@@ -12,6 +12,8 @@ import { BenchmarkRecord } from '../benchmark-record/benchmark-record';
 export class MapComponent {
   private map: L.Map | any;
   benchmarks: Benchmark[] = [];
+  defaultZoomLevel = 15;
+
   counters: Record<string, number> = {
     not_found: 0,
     found: 0,
@@ -33,7 +35,7 @@ export class MapComponent {
 
   private initMap(): void {
 
-    this.map = L.map('map').setView([53.96201, -1.08368], 15);
+    this.map = L.map('map').setView([53.96201, -1.08368], this.defaultZoomLevel);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors',
@@ -57,8 +59,14 @@ export class MapComponent {
 
         marker.on('click', () => {
           const latLng = marker.getLatLng();
-          const offsetLatLng = L.latLng(latLng.lat + 0.0025, latLng.lng); // Move ~167m north
-          this.map.setView(offsetLatLng, this.map.getZoom());
+
+          const zoom = this.map.getZoom(); // Get current zoom level
+          const baseOffset = 0.0025;  // Offset at default zoom level
+
+          // Scale offset: halve it for each zoom level above default
+          const scaledOffset = baseOffset * Math.pow(0.5, zoom - this.defaultZoomLevel);
+          const offsetLatLng = L.latLng(latLng.lat + scaledOffset, latLng.lng);
+          this.map.setView(offsetLatLng, zoom);
         });
 
       }
