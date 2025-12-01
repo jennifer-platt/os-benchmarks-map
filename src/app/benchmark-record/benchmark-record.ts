@@ -17,6 +17,7 @@ import { UpdateFound } from '../update-found/update-found';
 })
 export class BenchmarkRecord {
   @Input() description!: string;
+  @Input() id!: string;
   @Input() type!: string;
   @Input() status!: string;
   @Input() year!: string;

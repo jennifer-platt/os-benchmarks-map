@@ -127,6 +127,7 @@ export class MapComponent {
     const componentRef = factory.create(this.injector);
 
     componentRef.setInput('description', benchmark.description);
+    componentRef.setInput('id', benchmark.id);
     componentRef.setInput('type', benchmark.markType);
     componentRef.setInput('status', benchmark.status);
     componentRef.setInput('dateFound', benchmark.dateFound)
