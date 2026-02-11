@@ -7,6 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "github-build": "ng build --configuration production --base-href ''",
+    "github-deploy": "npx angular-cli-ghpages --dir=dist/browser --no-silent",
     "serve:ssr:os-benchmarks-map": "node dist/os-benchmarks-map/server/server.mjs"
   },
   "prettier": {
